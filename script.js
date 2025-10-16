@@ -308,14 +308,9 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Add smooth reveal animation to page load
+// Remove loading class to trigger cascade animations
 window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
+    document.body.classList.remove('loading');
 });
 
 // Keyboard navigation support
@@ -400,7 +395,7 @@ window.addEventListener('load', () => {
             setTimeout(() => {
                 loaderWrapper.remove();
             }, 500);
-        }, 800);
+        }, 300);
     }
 });
 
@@ -435,3 +430,29 @@ window.addEventListener('load', () => {
         initTiltEffect();
     }
 });
+
+// Theme toggle position adjustment on mobile
+function adjustThemeTogglePosition() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    // Only apply on mobile
+    if (window.innerWidth <= 768) {
+        const scrollY = window.pageYOffset;
+        const maxScroll = 100; // Distance to scroll before fully transitioning
+
+        if (scrollY < maxScroll) {
+            // Interpolate between 80px and 20px based on scroll position
+            const topPosition = 80 - (scrollY / maxScroll) * 60; // 60 = 80 - 20
+            themeToggle.style.top = topPosition + 'px';
+        } else {
+            themeToggle.style.top = '20px';
+        }
+    } else {
+        themeToggle.style.top = '90px';
+    }
+}
+
+window.addEventListener('scroll', adjustThemeTogglePosition);
+window.addEventListener('resize', adjustThemeTogglePosition);
+window.addEventListener('load', adjustThemeTogglePosition);
