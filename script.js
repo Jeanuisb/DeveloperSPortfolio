@@ -98,7 +98,7 @@ if (window.matchMedia('(hover: hover)').matches) {
     animateCursor();
 
     // Hover effects for interactive elements
-    document.querySelectorAll('a, button, .skill-card, .project-card, .stat-card, .social-link, .btn-download').forEach(el => {
+    document.querySelectorAll('a, button, .skill-card, .project-card, .stat-card, .social-link').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
             cursor.style.background = 'rgba(99, 102, 241, 0.5)';
@@ -358,19 +358,6 @@ const debouncedScrollHandler = debounce(() => {
 }, 10);
 
 window.addEventListener('scroll', debouncedScrollHandler);
-
-// Add loading states for better UX
-document.addEventListener('DOMContentLoaded', () => {
-    // Hide loading indicator if it exists
-    const loader = document.querySelector('.loader');
-    if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 500);
-    }
-
-    // Initialize any other components
-    console.log('Portfolio loaded successfully!');
-});
 
 // Scroll Progress Bar
 function updateScrollProgress() {
