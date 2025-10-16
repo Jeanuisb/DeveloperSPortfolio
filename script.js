@@ -223,7 +223,7 @@ function handleFormSubmit(event) {
         .then(() => {
             // Success state
             submitBtn.textContent = '✓ Message Sent!';
-            submitBtn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+            submitBtn.style.background = 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))';
             
             // Reset form
             event.target.reset();
@@ -236,7 +236,7 @@ function handleFormSubmit(event) {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
-                submitBtn.style.background = 'linear-gradient(135deg, var(--accent-green) 0%, var(--accent-blue) 100%)';
+                submitBtn.style.background = 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%)';
             }, 3000);
         })
         .catch((error) => {
@@ -253,7 +253,7 @@ function handleFormSubmit(event) {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
-                submitBtn.style.background = 'linear-gradient(135deg, var(--accent-green) 0%, var(--accent-blue) 100%)';
+                submitBtn.style.background = 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%)';
             }, 3000);
         });
 }
@@ -274,19 +274,20 @@ function showNotification(message, type = 'info') {
         position: 'fixed',
         top: '20px',
         right: '20px',
-        background: type === 'success' ? 'rgba(0, 255, 136, 0.9)' : 'rgba(255, 68, 68, 0.9)',
-        color: '#000',
+        background: type === 'success' ? 'rgba(99, 102, 241, 0.95)' : 'rgba(236, 72, 153, 0.95)',
+        color: '#ffffff',
         padding: '16px 24px',
         borderRadius: '12px',
         fontWeight: '500',
         fontSize: '14px',
         zIndex: '10000',
         backdropFilter: 'blur(20px)',
-        border: `1px solid ${type === 'success' ? 'rgba(0, 255, 136, 0.3)' : 'rgba(255, 68, 68, 0.3)'}`,
+        border: `1px solid ${type === 'success' ? 'rgba(99, 102, 241, 0.5)' : 'rgba(236, 72, 153, 0.5)'}`,
         transform: 'translateX(100%)',
         transition: 'transform 0.3s ease',
         maxWidth: '300px',
-        wordWrap: 'break-word'
+        wordWrap: 'break-word',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)'
     });
     
     document.body.appendChild(notification);
