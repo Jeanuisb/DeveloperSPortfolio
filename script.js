@@ -1,3 +1,19 @@
+// Dark/Light Mode Toggle
+const themeToggle = document.getElementById('themeToggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Check for saved theme preference or default to system preference
+const currentTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+if (currentTheme === 'light') {
+    document.body.classList.add('light-mode');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('theme', theme);
+});
+
 // Smooth scrolling for navigation
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -82,15 +98,15 @@ if (window.matchMedia('(hover: hover)').matches) {
     animateCursor();
 
     // Hover effects for interactive elements
-    document.querySelectorAll('a, button, .skill-card, .project-card, .stat-card').forEach(el => {
+    document.querySelectorAll('a, button, .skill-card, .project-card, .stat-card, .social-link, .btn-download').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            cursor.style.background = 'rgba(0, 255, 136, 0.5)';
+            cursor.style.background = 'rgba(99, 102, 241, 0.5)';
         });
-        
+
         el.addEventListener('mouseleave', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursor.style.background = '#00ff88';
+            cursor.style.background = '#6366f1';
         });
     });
 }
