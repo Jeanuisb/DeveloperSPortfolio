@@ -372,7 +372,66 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.style.opacity = '0';
         setTimeout(() => loader.remove(), 500);
     }
-    
+
     // Initialize any other components
     console.log('Portfolio loaded successfully!');
+});
+
+// Scroll Progress Bar
+function updateScrollProgress() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (!scrollProgress) return;
+
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.pageYOffset / windowHeight) * 100;
+
+    scrollProgress.style.width = scrolled + '%';
+}
+
+window.addEventListener('scroll', updateScrollProgress);
+window.addEventListener('resize', updateScrollProgress);
+
+// Hide loader on page load
+window.addEventListener('load', () => {
+    const loaderWrapper = document.getElementById('loader');
+    if (loaderWrapper) {
+        setTimeout(() => {
+            loaderWrapper.classList.add('hidden');
+            setTimeout(() => {
+                loaderWrapper.remove();
+            }, 500);
+        }, 800);
+    }
+});
+
+// 3D Tilt Effect for Project Cards
+function initTiltEffect() {
+    const cards = document.querySelectorAll('.project-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+}
+
+// Initialize tilt effect after page load
+window.addEventListener('load', () => {
+    if (window.matchMedia('(hover: hover)').matches) {
+        initTiltEffect();
+    }
 });

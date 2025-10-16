@@ -587,6 +587,98 @@ body.light-mode .grid-overlay {
     transform: translate(-50%, -50%);
 }
 
+/* Loading Animation */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-dark);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-wrapper.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    display: flex;
+    gap: 12px;
+}
+
+.loader-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    animation: loaderPulse 1.4s ease-in-out infinite;
+}
+
+.loader-circle:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader-circle:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader-circle:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loaderPulse {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+    z-index: 1001;
+    transition: width 0.1s ease;
+    width: 0;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* Gradient Text Hover Effects */
+.section h2,
+.hero h1,
+.project-title {
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.section h2:hover,
+.project-title:hover {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scale(1.02);
+}
+
+/* 3D Card Tilt Effect */
+.project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
 /* Dark/Light Mode Toggle */
 .theme-toggle {
     position: fixed;
@@ -708,6 +800,7 @@ body.light-mode .moon-icon {
     }
 
     .theme-toggle {
+        position: fixed;
         top: 20px;
         right: 20px;
         width: 44px;
