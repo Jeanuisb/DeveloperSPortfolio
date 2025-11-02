@@ -39,6 +39,13 @@ body {
     scroll-behavior: smooth;
     transition: background 0.3s ease, color 0.3s ease;
     position: relative;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Background Effects */
